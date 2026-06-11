@@ -6,6 +6,7 @@ resource "azurerm_resource_group" "this" {
 }
 
 resource "azurerm_container_group" "this" {
+  #checkov:skip=CKV_AZURE_235: Module exposes both environment_variables and secure_environment_variables as inputs; enforcing secure-only is the caller's responsibility.
   name                                = var.container_group.name
   location                            = var.container_group.location == null ? azurerm_resource_group.this[0].location : var.container_group.location
   resource_group_name                 = var.container_group.resource_group_name == null ? azurerm_resource_group.this[0].name : var.container_group.resource_group_name
